@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .top-header {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #1E1F29;
+        }
+
+        header-links li {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 12px;
+        }
+
+        .header-links li:last-child {
+            margin-right: 0px;
+        }
+
+        .header-links li a {
+            color: #FFF;
+        }
+
+            .header-links li a:hover {
+                color: #D10024;
+            }
+
+        .header-links li i {
+            color: #D10024;
+            margin-right: 5px;
+        }
+
+        .bgcolor {
+            background-color: palegreen;
+        }
+
+        a {
+            color: white;
+            fon font-size:larger;
+        }
+
+        .Count {
+            position: relative;
+            left: 40px;
+            top: -8px;
+            display: block;
+            width: 22px;
+            height: 22px;
+            border-radius: 50px;
+            background: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bgcolor">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index","Home")"><img src="~/img/logo.png" /></a>
+
+            <div class=" collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Index","Home")"><p> Store</p></a>
+                    </li>
+                    <li class="nav-item active">
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Catégories
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href=@Url.Action("Sport","Categorie")>Sport</a>
+                                <a class="dropdown-item" href=@Url.Action("Electro","Categorie")>Electronique</a>
+                                <a class="dropdown-item" href=@Url.Action("Mode","Categorie")>Mode</a>
+
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link " href="#">Disabled</a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+
+
+            <div class="nav navbar-light">
+                <div class="Count">
+                    <p>0</p>
+                </div>
+                <a href=@Url.Action("Basket","Categorie")> <img src="~/img/basket.png" /></a>
+
+            </div>
+        </nav>
+        <form class="form-inline my-2 my-lg-0 b">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+    </header>
+
+    <br />
+    <br />
+
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+
+    <div>
+        <hr />
+        <footer>
+
+
+
+
+            <p>&copy; @DateTime.Now.Year - Mon application ASP.NET</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

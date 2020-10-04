@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccsEco", "AccsEco\AccsEco.csproj", "{C49AD3B8-C6E1-4BA4-BF61-92DD64527C63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C49AD3B8-C6E1-4BA4-BF61-92DD64527C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C49AD3B8-C6E1-4BA4-BF61-92DD64527C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C49AD3B8-C6E1-4BA4-BF61-92DD64527C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C49AD3B8-C6E1-4BA4-BF61-92DD64527C63}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F392CD9-FC69-4414-8DE0-15CB1095F384}
+	EndGlobalSection
+EndGlobal

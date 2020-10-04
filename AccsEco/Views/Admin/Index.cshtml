@@ -1,0 +1,79 @@
+﻿@model IEnumerable<AccsEco.Models.Produit>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+
+<div class="btn btn-success">
+    @Html.ActionLink("Nouveau Produit", "AddProduct")
+
+</div>
+<br />
+<br />
+<br />
+<table class="table">
+    <tr>
+        <td>Image</td>
+        <td>Nom de Produit</td>
+        <td>Description</td>
+        <td>Prix</td>
+        <td>Mise à jour</td>
+
+    </tr>
+
+    @foreach (var t in Model)
+    {
+
+<tr>
+   
+   
+    <td>
+        @foreach (var a in t.ImageProduit)
+        {
+            <img width="150px" height="150px" src="@Url.Content(a.PathImage)" class="img-thumbnail"  />
+            break;
+        }
+    </td>
+    
+    <td>
+        <p> @Html.Label(t.desegnation) </p>
+    </td>
+    <td>
+        <p> @Html.Label(t.DescriptionProduit)) </p>
+    </td>
+
+    <td>
+        <p> @Html.Label(t.Prix.ToString()) </p>
+    </td>
+    <td>
+
+        <div class="btn btn-info">
+            @Html.AntiForgeryToken()
+
+            @Html.ActionLink("Modifier", "Update", new { id = t.IDProduit })
+        </div>
+        <div class="btn btn-danger">
+            @Html.AntiForgeryToken()
+            @Html.ActionLink("Supprimer", "Delete", new { id = t.IDProduit })
+        </div>
+
+
+    </td>
+
+</tr>
+
+
+
+    }
+
+
+</table>
+
+
+
+
+
+

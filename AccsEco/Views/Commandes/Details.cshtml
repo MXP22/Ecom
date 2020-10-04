@@ -1,0 +1,27 @@
+﻿@model AccsEco.Models.Commande
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Commande</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UtilisateurSite.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UtilisateurSite.Nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDcommande }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

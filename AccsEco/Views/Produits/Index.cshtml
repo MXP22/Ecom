@@ -1,0 +1,70 @@
+﻿@model IEnumerable<AccsEco.Models.Produit>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.desegnation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescriptionProduit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prixbarre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categorie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codebar)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.desegnation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescriptionProduit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prixbarre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.categorie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codebar)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDProduit }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDProduit }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDProduit })
+        </td>
+    </tr>
+}
+
+</table>

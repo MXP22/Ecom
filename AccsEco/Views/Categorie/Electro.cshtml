@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AccsEco.Models.Produit>
+@{
+    ViewBag.Title = "Electro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Electro</h2>
+
+<div class="row row-cols-1 row-cols-md-3">
+    @foreach (var item in Model)
+    {
+        <div class="col mb-4">
+            <div class="card h-100">
+
+
+                @foreach (var image in item.ImageProduit)
+                {
+                    if (image == null)
+                    {
+                        <img src="~/img/basket.png" class="card-img-top">
+
+                    }
+                    else
+                    {
+
+                        <img src=@image.PathImage alt="Image" class="card-img-top"  enctype ="Multipart/form-data" />
+                        break;
+                    }
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@item.desegnation</h5>
+                    <p class="card-text">@item.Prix</p>
+
+
+                    <div class="row">
+                        <div class="col">
+                            @using (Html.BeginForm("DetailProduit", "Categorie", new { ID = item.IDProduit }))
+                            {
+                                <input type="submit" value="View" class="btn btn-block" />
+                            }
+
+                        </div>
+                        <div class="col">
+                            @using (Html.BeginForm())
+                            {
+                                <input type="submit" value="Add" class="btn btn-block" />
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

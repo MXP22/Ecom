@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AccsEco.Models.ImageProduit>
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+
+<div class="container">
+
+    <h4>Image Produit</h4>
+
+    <div class="row">
+
+        <div class="col">
+
+            @foreach (var item in Model)
+            {
+                <img src=@item.PathImage />
+
+               <p>@item.NomImage</p>
+
+
+            }
+
+
+
+
+        </div>
+
+        <div class="container">
+
+            @using (Html.BeginForm("Delete", "Admin"))
+            {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Supp" class="btn btn-block" />
+
+            }
+
+
+        </div>
+
+    </div>
+
+
+
+
+</div>

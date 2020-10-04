@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Achat">
+      <EntityTypeMapping TypeName="Model.Achat">
+        <MappingFragment StoreEntitySet="Achat">
+          <ScalarProperty Name="IDachat" ColumnName="IDachat" />
+          <ScalarProperty Name="DataAchat" ColumnName="DataAchat" />
+          <ScalarProperty Name="Idutilisateur" ColumnName="Idutilisateur" />
+          <ScalarProperty Name="Idproduit" ColumnName="Idproduit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="commentaire">
+      <EntityTypeMapping TypeName="Model.commentaire">
+        <MappingFragment StoreEntitySet="commentaire">
+          <ScalarProperty Name="IDcommentaire" ColumnName="IDcommentaire" />
+          <ScalarProperty Name="ContenuCommantaire" ColumnName="ContenuCommantaire" />
+          <ScalarProperty Name="IDutilisateur" ColumnName="IDutilisateur" />
+          <ScalarProperty Name="IdProduit" ColumnName="IdProduit" />
+          <ScalarProperty Name="dateCom" ColumnName="dateCom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageUtilisateur">
+      <EntityTypeMapping TypeName="Model.MessageUtilisateur">
+        <MappingFragment StoreEntitySet="MessageUtilisateur">
+          <ScalarProperty Name="IdMessage" ColumnName="IdMessage" />
+          <ScalarProperty Name="contenuMessage" ColumnName="contenuMessage" />
+          <ScalarProperty Name="dateMessage" ColumnName="dateMessage" />
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photos">
+      <EntityTypeMapping TypeName="Model.Photos">
+        <MappingFragment StoreEntitySet="Photos">
+          <ScalarProperty Name="IDphoto" ColumnName="IDphoto" />
+          <ScalarProperty Name="Photocontenu" ColumnName="Photocontenu" />
+          <ScalarProperty Name="IdProduit" ColumnName="IdProduit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produit">
+      <EntityTypeMapping TypeName="Model.Produit">
+        <MappingFragment StoreEntitySet="Produit">
+          <ScalarProperty Name="IDproduit" ColumnName="IDproduit" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Codebarre" ColumnName="Codebarre" />
+          <ScalarProperty Name="Qte" ColumnName="Qte" />
+          <ScalarProperty Name="PrixHT" ColumnName="PrixHT" />
+          <ScalarProperty Name="Tva" ColumnName="Tva" />
+          <ScalarProperty Name="Prixbarre" ColumnName="Prixbarre" />
+          <ScalarProperty Name="Categorie" ColumnName="Categorie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transactionP">
+      <EntityTypeMapping TypeName="Model.transactionP">
+        <MappingFragment StoreEntitySet="transactionP">
+          <ScalarProperty Name="IDtransaction" ColumnName="IDtransaction" />
+          <ScalarProperty Name="NumeroTransaction" ColumnName="NumeroTransaction" />
+          <ScalarProperty Name="modePaiment" ColumnName="modePaiment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transport">
+      <EntityTypeMapping TypeName="Model.Transport">
+        <MappingFragment StoreEntitySet="Transport">
+          <ScalarProperty Name="IDtransport" ColumnName="IDtransport" />
+          <ScalarProperty Name="nomTransport" ColumnName="nomTransport" />
+          <ScalarProperty Name="IDsuivi" ColumnName="IDsuivi" />
+          <ScalarProperty Name="EtatColis" ColumnName="EtatColis" />
+          <ScalarProperty Name="IDproduit" ColumnName="IDproduit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilisateur">
+      <EntityTypeMapping TypeName="Model.Utilisateur">
+        <MappingFragment StoreEntitySet="Utilisateur">
+          <ScalarProperty Name="IDutilisateur" ColumnName="IDutilisateur" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="numeroTelephone" ColumnName="numeroTelephone" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="RoleUser" ColumnName="RoleUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<AccsEco.Models.Panier>
+<style>
+
+    .btnadd {
+        background-color: green;
+        border-radius: 50px;
+        width: 43px;  
+        height: 40px;
+        position: absolute;
+        right: 236px;
+    }
+
+  
+
+</style>
+@{
+    ViewBag.Title = "Basket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Panier</h2>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            <p>Image</p>
+        </th>
+        <th>
+            <p>Designation</p>
+        </th>
+        <th>
+            <p>Qte</p>
+        </th>
+
+        <th>
+            <p>PrixHT</p>
+        </th>
+        <th>
+            <p>Tva</p>
+        </th>
+        <th>
+            <p> Categorie</p>
+        </th>
+        <th>
+            <br />
+
+        </th>
+    </tr>
+     @foreach(var item in Model)
+         {
+
+    <tr>
+        <th>
+            <img src=@item.image/>
+        </th>
+        <th>
+            @Html.LabelFor(model=>item.desegnation)
+        </th>
+        <th>
+            @Html.EditorFor(model=>item.qte)
+        </th>
+
+        <th>
+            @Html.EditorFor(model => item.qte)
+        </th>
+        
+       
+        <th>
+        <td>
+            @using (@Html.BeginForm("Basket", "Categorie", FormMethod.Post, new { id = 1 }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div >
+                <input class="btnadd" type="submit" />
+                </div>
+
+            }
+    
+         
+            </td>
+        </th>
+
+    </tr>
+
+             }
+         
+</table>
+
+
+
+

@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AcceecoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="IDcommande" />
+    </Key>
+    <Property Name="IDcommande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDuser" Type="int" />
+  </EntityType>
+  <EntityType Name="CommandeDtrail">
+    <Key>
+      <PropertyRef Name="IDcommandedetail" />
+    </Key>
+    <Property Name="IDcommandedetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDcommande" Type="int" />
+    <Property Name="IDproduit" Type="int" />
+    <Property Name="dateCommande" Type="datetime" />
+    <Property Name="Qte" Type="int" />
+    <Property Name="IdTransport" Type="int" />
+  </EntityType>
+  <EntityType Name="ImageProduit">
+    <Key>
+      <PropertyRef Name="IDimage" />
+    </Key>
+    <Property Name="IDimage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomImage" Type="text" />
+    <Property Name="PathImage" Type="text" />
+    <Property Name="IdProduit" Type="int" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="IDProduit" />
+    </Key>
+    <Property Name="IDProduit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desegnation" Type="varchar" MaxLength="40" />
+    <Property Name="DescriptionProduit" Type="varchar" MaxLength="500" />
+    <Property Name="Prix" Type="float" />
+    <Property Name="qte" Type="int" />
+    <Property Name="Prixbarre" Type="float" />
+    <Property Name="categorie" Type="varchar" MaxLength="50" />
+    <Property Name="codebar" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="transport">
+    <Key>
+      <PropertyRef Name="idTransport" />
+    </Key>
+    <Property Name="idTransport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomtransporot" Type="text" />
+    <Property Name="idsuivi" Type="text" />
+    <Property Name="Etat" Type="text" />
+  </EntityType>
+  <EntityType Name="UtilisateurSite">
+    <Key>
+      <PropertyRef Name="IDuser" />
+    </Key>
+    <Property Name="IDuser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nom" Type="text" />
+    <Property Name="Prenom" Type="text" />
+    <Property Name="Email" Type="text" />
+    <Property Name="telephone" Type="text" />
+    <Property Name="Adresse" Type="text" />
+    <Property Name="CodePostal" Type="text" />
+    <Property Name="Ville" Type="text" />
+    <Property Name="Pays" Type="text" />
+    <Property Name="Motdepasse" Type="text" />
+    <Property Name="Roleuser" Type="text" />
+  </EntityType>
+  <Association Name="FK__Commande__IDuser__2B3F6F97">
+    <End Role="UtilisateurSite" Type="Self.UtilisateurSite" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UtilisateurSite">
+        <PropertyRef Name="IDuser" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="IDuser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommandeD__IDcom__3A81B327">
+    <End Role="Commande" Type="Self.Commande" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommandeDtrail" Type="Self.CommandeDtrail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="IDcommande" />
+      </Principal>
+      <Dependent Role="CommandeDtrail">
+        <PropertyRef Name="IDcommande" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommandeD__IDpro__3B75D760">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="CommandeDtrail" Type="Self.CommandeDtrail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="IDProduit" />
+      </Principal>
+      <Dependent Role="CommandeDtrail">
+        <PropertyRef Name="IDproduit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommandeD__IdTra__3C69FB99">
+    <End Role="transport" Type="Self.transport" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommandeDtrail" Type="Self.CommandeDtrail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="transport">
+        <PropertyRef Name="idTransport" />
+      </Principal>
+      <Dependent Role="CommandeDtrail">
+        <PropertyRef Name="IdTransport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ImageProd__IdPro__267ABA7A">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ImageProduit" Type="Self.ImageProduit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="IDProduit" />
+      </Principal>
+      <Dependent Role="ImageProduit">
+        <PropertyRef Name="IdProduit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AcceecoModelStoreContainer">
+    <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommandeDtrail" EntityType="Self.CommandeDtrail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImageProduit" EntityType="Self.ImageProduit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="transport" EntityType="Self.transport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UtilisateurSite" EntityType="Self.UtilisateurSite" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Commande__IDuser__2B3F6F97" Association="Self.FK__Commande__IDuser__2B3F6F97">
+      <End Role="UtilisateurSite" EntitySet="UtilisateurSite" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommandeD__IDcom__3A81B327" Association="Self.FK__CommandeD__IDcom__3A81B327">
+      <End Role="Commande" EntitySet="Commande" />
+      <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommandeD__IDpro__3B75D760" Association="Self.FK__CommandeD__IDpro__3B75D760">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommandeD__IdTra__3C69FB99" Association="Self.FK__CommandeD__IdTra__3C69FB99">
+      <End Role="transport" EntitySet="transport" />
+      <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ImageProd__IdPro__267ABA7A" Association="Self.FK__ImageProd__IdPro__267ABA7A">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="ImageProduit" EntitySet="ImageProduit" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

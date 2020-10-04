@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Achat">
+    <Key>
+      <PropertyRef Name="IDachat" />
+    </Key>
+    <Property Name="IDachat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataAchat" Type="DateTime" Precision="0" />
+    <Property Name="Idutilisateur" Type="Int32" />
+    <Property Name="Idproduit" Type="Int32" />
+    <NavigationProperty Name="Produit" Relationship="Self.FK__Achat__Idproduit__4AB81AF0" FromRole="Achat" ToRole="Produit" />
+    <NavigationProperty Name="Utilisateur" Relationship="Self.FK__Achat__Idutilisa__49C3F6B7" FromRole="Achat" ToRole="Utilisateur" />
+  </EntityType>
+  <EntityType Name="commentaire">
+    <Key>
+      <PropertyRef Name="IDcommentaire" />
+    </Key>
+    <Property Name="IDcommentaire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContenuCommantaire" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IDutilisateur" Type="Int32" />
+    <Property Name="IdProduit" Type="Int32" />
+    <Property Name="dateCom" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Produit" Relationship="Self.FK__commentai__IdPro__52593CB8" FromRole="commentaire" ToRole="Produit" />
+    <NavigationProperty Name="Utilisateur" Relationship="Self.FK__commentai__IDuti__5165187F" FromRole="commentaire" ToRole="Utilisateur" />
+  </EntityType>
+  <EntityType Name="MessageUtilisateur">
+    <Key>
+      <PropertyRef Name="IdMessage" />
+    </Key>
+    <Property Name="IdMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="contenuMessage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="dateMessage" Type="DateTime" Precision="0" />
+    <Property Name="Iduser" Type="Int32" />
+    <NavigationProperty Name="Utilisateur" Relationship="Self.FK__MessageUt__Iduse__5CD6CB2B" FromRole="MessageUtilisateur" ToRole="Utilisateur" />
+  </EntityType>
+  <EntityType Name="Photos">
+    <Key>
+      <PropertyRef Name="IDphoto" />
+    </Key>
+    <Property Name="IDphoto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Photocontenu" Type="Int32" />
+    <Property Name="IdProduit" Type="Int32" />
+    <NavigationProperty Name="Produit" Relationship="Self.FK__Photos__IdProdui__4E88ABD4" FromRole="Photos" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="IDproduit" />
+    </Key>
+    <Property Name="IDproduit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codebarre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Qte" Type="Int32" />
+    <Property Name="PrixHT" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Tva" Type="Int32" />
+    <Property Name="Prixbarre" Type="Int32" />
+    <Property Name="Categorie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Achat" Relationship="Self.FK__Achat__Idproduit__4AB81AF0" FromRole="Produit" ToRole="Achat" />
+    <NavigationProperty Name="commentaire" Relationship="Self.FK__commentai__IdPro__52593CB8" FromRole="Produit" ToRole="commentaire" />
+    <NavigationProperty Name="Photos" Relationship="Self.FK__Photos__IdProdui__4E88ABD4" FromRole="Produit" ToRole="Photos" />
+    <NavigationProperty Name="Transport" Relationship="Self.FK__Transport__IDpro__5535A963" FromRole="Produit" ToRole="Transport" />
+  </EntityType>
+  <EntityType Name="transactionP">
+    <Key>
+      <PropertyRef Name="IDtransaction" />
+    </Key>
+    <Property Name="IDtransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroTransaction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="modePaiment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Transport">
+    <Key>
+      <PropertyRef Name="IDtransport" />
+    </Key>
+    <Property Name="IDtransport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nomTransport" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="IDsuivi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EtatColis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDproduit" Type="Int32" />
+    <NavigationProperty Name="Produit" Relationship="Self.FK__Transport__IDpro__5535A963" FromRole="Transport" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="IDutilisateur" />
+    </Key>
+    <Property Name="IDutilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="numeroTelephone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Adresse" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="RoleUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Achat" Relationship="Self.FK__Achat__Idutilisa__49C3F6B7" FromRole="Utilisateur" ToRole="Achat" />
+    <NavigationProperty Name="commentaire" Relationship="Self.FK__commentai__IDuti__5165187F" FromRole="Utilisateur" ToRole="commentaire" />
+    <NavigationProperty Name="MessageUtilisateur" Relationship="Self.FK__MessageUt__Iduse__5CD6CB2B" FromRole="Utilisateur" ToRole="MessageUtilisateur" />
+  </EntityType>
+  <Association Name="FK__Achat__Idproduit__4AB81AF0">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="Achat" Type="Self.Achat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="IDproduit" />
+      </Principal>
+      <Dependent Role="Achat">
+        <PropertyRef Name="Idproduit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Achat__Idutilisa__49C3F6B7">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="Achat" Type="Self.Achat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="IDutilisateur" />
+      </Principal>
+      <Dependent Role="Achat">
+        <PropertyRef Name="Idutilisateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__commentai__IdPro__52593CB8">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="commentaire" Type="Self.commentaire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="IDproduit" />
+      </Principal>
+      <Dependent Role="commentaire">
+        <PropertyRef Name="IdProduit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__commentai__IDuti__5165187F">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="commentaire" Type="Self.commentaire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="IDutilisateur" />
+      </Principal>
+      <Dependent Role="commentaire">
+        <PropertyRef Name="IDutilisateur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MessageUt__Iduse__5CD6CB2B">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="MessageUtilisateur" Type="Self.MessageUtilisateur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="IDutilisateur" />
+      </Principal>
+      <Dependent Role="MessageUtilisateur">
+        <PropertyRef Name="Iduser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Photos__IdProdui__4E88ABD4">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="IDproduit" />
+      </Principal>
+      <Dependent Role="Photos">
+        <PropertyRef Name="IdProduit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Transport__IDpro__5535A963">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="Transport" Type="Self.Transport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="IDproduit" />
+      </Principal>
+      <Dependent Role="Transport">
+        <PropertyRef Name="IDproduit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Achat" EntityType="Self.Achat" />
+    <EntitySet Name="commentaire" EntityType="Self.commentaire" />
+    <EntitySet Name="MessageUtilisateur" EntityType="Self.MessageUtilisateur" />
+    <EntitySet Name="Photos" EntityType="Self.Photos" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" />
+    <EntitySet Name="transactionP" EntityType="Self.transactionP" />
+    <EntitySet Name="Transport" EntityType="Self.Transport" />
+    <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" />
+    <AssociationSet Name="FK__Achat__Idproduit__4AB81AF0" Association="Self.FK__Achat__Idproduit__4AB81AF0">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="Achat" EntitySet="Achat" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Achat__Idutilisa__49C3F6B7" Association="Self.FK__Achat__Idutilisa__49C3F6B7">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Achat" EntitySet="Achat" />
+    </AssociationSet>
+    <AssociationSet Name="FK__commentai__IdPro__52593CB8" Association="Self.FK__commentai__IdPro__52593CB8">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="commentaire" EntitySet="commentaire" />
+    </AssociationSet>
+    <AssociationSet Name="FK__commentai__IDuti__5165187F" Association="Self.FK__commentai__IDuti__5165187F">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="commentaire" EntitySet="commentaire" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MessageUt__Iduse__5CD6CB2B" Association="Self.FK__MessageUt__Iduse__5CD6CB2B">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="MessageUtilisateur" EntitySet="MessageUtilisateur" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Photos__IdProdui__4E88ABD4" Association="Self.FK__Photos__IdProdui__4E88ABD4">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="Photos" EntitySet="Photos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Transport__IDpro__5535A963" Association="Self.FK__Transport__IDpro__5535A963">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="Transport" EntitySet="Transport" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
