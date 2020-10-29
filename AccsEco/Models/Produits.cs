@@ -11,6 +11,7 @@ namespace AccsEco.Models
     {
 
         public int IDproduit { get; set; }
+        [Display(Name ="Code Barre")]
         public string codebarre { get; set; }
 
         [Display(Name ="Nom Produit")]

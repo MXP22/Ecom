@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 using WebGrease.Configuration;
@@ -14,28 +15,84 @@ namespace AccsEco.Controllers
     {
         // GET: Categorie
         private AcceecoEntities db = new AcceecoEntities();
-        public ActionResult Sport()
+        public ActionResult Sport(string Submit)
         {
-
-            return View();
-        }
-        public ActionResult Mode()
-        {
-            return View();
-        }
-        public ActionResult Electro()
-        {
-            var produit = db.Produit.Include(P => P.ImageProduit).Where(P => P.categorie == "Electro" || P.categorie == "electro");
+            if (Submit == "Add") { }
+            var produit = db.Produit.Include(P => P.ImageProduit).Where(P => P.categorie == "Sport" || P.categorie == "sport");
 
             return View(produit.ToList());
         }
-        public ActionResult DetailProduit()
+        public ActionResult Mode(string Submit,int? id)
         {
-            ViewBag.message = "Hello";
-            return View();
+            if (Submit == "Add")
+            {
+
+                db.UtilisateurSite.Add(new UtilisateurSite { Adresse = "hajdkddlsodihfdhsd2050" ,telephone=id.ToString()});
+
+                db.SaveChanges();
+
+            }
+
+            var produit = db.Produit.Include(P => P.ImageProduit).Where(P => P.categorie == "Mode" || P.categorie == "mode");
+
+            return View(produit.ToList());
+        }
+        public ActionResult Electro(string Submit)
+        {
+            if (Submit == "Add") { }
+
+            var produit = db.Produit.Include(P => P.ImageProduit).Where(P => P.categorie == "Elecrtonique" || P.categorie == "elecrtonique");
+
+            return View(produit.ToList());
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DetailProduit(int? id, string submit)
+        {
+            Produit produit = null;
+
+            produit = db.Produit.Include(P => P.ImageProduit).SingleOrDefault(c => c.IDProduit == id);
+            if (submit == "Ajouter au panier")
+            {
+                UtilisateurSite utilisateurSite = new UtilisateurSite() { Adresse = "Hello", Nom = "Hjhahaha", telephone = id.ToString() };
+
+                db.UtilisateurSite.Add(utilisateurSite);
+
+                db.SaveChanges();
+
+            }
+
+
+
+            return View(produit);
+        }
+        //ajouter Produit au panier
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult Addtobasket(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var produit = db.Produit.Include(P => P.ImageProduit).SingleOrDefault(c => c.IDProduit == id);
+
+                ViewData["Qte"] = produit.qte;
+                UtilisateurSite utilisateurSite = new UtilisateurSite() { Adresse = "Hello", Nom = "Hjhahaha", telephone = id.ToString() };
+
+                db.UtilisateurSite.Add(utilisateurSite);
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("DetailProduit");
+
+        }
+
+
+        //contenu de panier
         public ActionResult Basket()
         {
 

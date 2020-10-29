@@ -22,7 +22,11 @@ namespace AccsEco.Models
     
         public int IDcommande { get; set; }
         public Nullable<int> IDuser { get; set; }
+        public Nullable<System.DateTime> Datecommande { get; set; }
+        public string Etat { get; set; }
+        public Nullable<int> IDtransport { get; set; }
     
+        public virtual transport transport { get; set; }
         public virtual UtilisateurSite UtilisateurSite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommandeDtrail> CommandeDtrail { get; set; }

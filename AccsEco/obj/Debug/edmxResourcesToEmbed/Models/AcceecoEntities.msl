@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AcceecoModelStoreContainer" CdmEntityContainer="AcceecoEntities">
+    <EntitySetMapping Name="Avis">
+      <EntityTypeMapping TypeName="AcceecoModel.Avis">
+        <MappingFragment StoreEntitySet="Avis">
+          <ScalarProperty Name="idAvis" ColumnName="idAvis" />
+          <ScalarProperty Name="textavis" ColumnName="textavis" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="idproduit" ColumnName="idproduit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commande">
+      <EntityTypeMapping TypeName="AcceecoModel.Commande">
+        <MappingFragment StoreEntitySet="Commande">
+          <ScalarProperty Name="IDcommande" ColumnName="IDcommande" />
+          <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+          <ScalarProperty Name="Datecommande" ColumnName="Datecommande" />
+          <ScalarProperty Name="Etat" ColumnName="Etat" />
+          <ScalarProperty Name="IDtransport" ColumnName="IDtransport" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommandeDtrail">
+      <EntityTypeMapping TypeName="AcceecoModel.CommandeDtrail">
+        <MappingFragment StoreEntitySet="CommandeDtrail">
+          <ScalarProperty Name="IDcommandedetail" ColumnName="IDcommandedetail" />
+          <ScalarProperty Name="IDcommande" ColumnName="IDcommande" />
+          <ScalarProperty Name="IDproduit" ColumnName="IDproduit" />
+          <ScalarProperty Name="dateCommande" ColumnName="dateCommande" />
+          <ScalarProperty Name="Qte" ColumnName="Qte" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageProduit">
+      <EntityTypeMapping TypeName="AcceecoModel.ImageProduit">
+        <MappingFragment StoreEntitySet="ImageProduit">
+          <ScalarProperty Name="IDimage" ColumnName="IDimage" />
+          <ScalarProperty Name="NomImage" ColumnName="NomImage" />
+          <ScalarProperty Name="PathImage" ColumnName="PathImage" />
+          <ScalarProperty Name="IdProduit" ColumnName="IdProduit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produit">
+      <EntityTypeMapping TypeName="AcceecoModel.Produit">
+        <MappingFragment StoreEntitySet="Produit">
+          <ScalarProperty Name="IDProduit" ColumnName="IDProduit" />
+          <ScalarProperty Name="desegnation" ColumnName="desegnation" />
+          <ScalarProperty Name="DescriptionProduit" ColumnName="DescriptionProduit" />
+          <ScalarProperty Name="Prix" ColumnName="Prix" />
+          <ScalarProperty Name="qte" ColumnName="qte" />
+          <ScalarProperty Name="Prixbarre" ColumnName="Prixbarre" />
+          <ScalarProperty Name="categorie" ColumnName="categorie" />
+          <ScalarProperty Name="codebar" ColumnName="codebar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transport">
+      <EntityTypeMapping TypeName="AcceecoModel.transport">
+        <MappingFragment StoreEntitySet="transport">
+          <ScalarProperty Name="idTransport" ColumnName="idTransport" />
+          <ScalarProperty Name="nomtransporot" ColumnName="nomtransporot" />
+          <ScalarProperty Name="idsuivi" ColumnName="idsuivi" />
+          <ScalarProperty Name="Etat" ColumnName="Etat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UtilisateurSite">
+      <EntityTypeMapping TypeName="AcceecoModel.UtilisateurSite">
+        <MappingFragment StoreEntitySet="UtilisateurSite">
+          <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+          <ScalarProperty Name="Ville" ColumnName="Ville" />
+          <ScalarProperty Name="Pays" ColumnName="Pays" />
+          <ScalarProperty Name="Motdepasse" ColumnName="Motdepasse" />
+          <ScalarProperty Name="Roleuser" ColumnName="Roleuser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

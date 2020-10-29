@@ -12,15 +12,13 @@ namespace AccsEco.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CommandeDtrail
+    public partial class Avis
     {
-        public int IDcommandedetail { get; set; }
-        public Nullable<int> IDcommande { get; set; }
-        public Nullable<int> IDproduit { get; set; }
-        public Nullable<System.DateTime> dateCommande { get; set; }
-        public Nullable<int> Qte { get; set; }
+        public int idAvis { get; set; }
+        public string textavis { get; set; }
+        public Nullable<int> note { get; set; }
+        public Nullable<int> idproduit { get; set; }
     
-        public virtual Commande Commande { get; set; }
         public virtual Produit Produit { get; set; }
     }
 }

@@ -1,46 +1,74 @@
-﻿
+﻿@model IEnumerable<AccsEco.Models.Produit>
 @{
     ViewBag.Title = "Mode";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+
+    <link href="http://cdn-na.infragistics.com/igniteui/2020.1/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+    <link href="http://cdn-na.infragistics.com/igniteui/2020.1/latest/css/structure/infragistics.css" rel="stylesheet" />
+
+    <script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <!-- Ignite UI for jQuery Required Combined JavaScript Files -->
+    <script src="http://cdn-na.infragistics.com/igniteui/2020.1/latest/js/infragistics.core.js"></script>
+    <script src="http://cdn-na.infragistics.com/igniteui/2020.1/latest/js/infragistics.lob.js"></script>
+
+</head>
 <h2>Mode</h2>
 
 <div class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    @foreach (var item in Model)
+    {
+        <div class="col mb-4">
+            <div class="card h-100">
+
+
+                @foreach (var image in item.ImageProduit)
+                {
+                    if (image == null)
+                    {
+                        <img src="~/img/basket.png" class="card-img-top">
+
+                    }
+                    else
+                    {
+
+                        <img src="~/StorageImage/@image.NomImage" alt="Image" class="card-img-top" enctype="Multipart/form-data" />
+                        break;
+                    }
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@item.desegnation</h5>
+                    <p class="card-text">@item.Prix</p>
+
+
+                    <div class="row">
+                        <div class="col">
+                            @using (Html.BeginForm("DetailProduit", "Categorie", new { ID = item.IDProduit }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="submit" value="View" class="btn btn-block" />
+                            }
+
+
+                        </div>
+                        <div class="col">
+                            @using (Html.BeginForm("Mode", "Categorie", new { ID = item.IDProduit }, FormMethod.Post))
+                            {
+                                        @Html.AntiForgeryToken()
+
+
+                                        <input type="submit" value="Add" class="btn btn-block" name="Submit" />
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a short card.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
+    }
 </div>

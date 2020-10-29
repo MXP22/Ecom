@@ -44,6 +44,10 @@ namespace AccsEco.Controllers
         // GET:AddProduct
         public ActionResult AddProduct()
         {
+            List<string> listecétegorie = new List<string>() { "Elecrtonique", "Mode", "Sport", "Jardinage", "Economique" };
+            
+            ViewBag.list = listecétegorie;
+            
             return View();
         }
 
@@ -53,6 +57,10 @@ namespace AccsEco.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddProduct(List<HttpPostedFileBase> files, Produits produits)
         {
+            List<string> listecétegorie = new List<string>() { "Elertonique", "Mode", "Sport", "Jardinage", "Economique" };
+
+            ViewBag.list = listecétegorie;
+
             Produit produit = new Produit();
             List<ImageProduit> imageProduit = new List<ImageProduit>();
             int idproduit = 0;
@@ -100,7 +108,12 @@ namespace AccsEco.Controllers
 
         }
 
+        public ActionResult Update()
+        {
 
+
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Update(int id)

@@ -25,6 +25,7 @@ namespace AccsEco.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Avis> Avis { get; set; }
         public virtual DbSet<Commande> Commande { get; set; }
         public virtual DbSet<CommandeDtrail> CommandeDtrail { get; set; }
         public virtual DbSet<ImageProduit> ImageProduit { get; set; }

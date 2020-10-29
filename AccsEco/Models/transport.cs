@@ -17,7 +17,7 @@ namespace AccsEco.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public transport()
         {
-            this.CommandeDtrail = new HashSet<CommandeDtrail>();
+            this.Commande = new HashSet<Commande>();
         }
     
         public int idTransport { get; set; }
@@ -26,6 +26,6 @@ namespace AccsEco.Models
         public string Etat { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CommandeDtrail> CommandeDtrail { get; set; }
+        public virtual ICollection<Commande> Commande { get; set; }
     }
 }

@@ -6,24 +6,20 @@ using System.Web.Mvc;
 
 namespace AccsEco.Controllers
 {
-    public class StoreController : Controller
+    public class CheckoutController : Controller
     {
-        // GET: Store
-        public ActionResult Index()
+        // GET: Checkout
+        public ActionResult Checkout()
         {
             return View();
         }
 
-
-        public ActionResult CreationArticle()
+        public ActionResult Paiement()
         {
+
+
+
             return View();
         }
-
-
-
-
-
-
     }
 }

@@ -27,43 +27,43 @@
     @foreach (var t in Model)
     {
 
-<tr>
-   
-   
-    <td>
-        @foreach (var a in t.ImageProduit)
-        {
-            <img width="150px" height="150px" src="@Url.Content(a.PathImage)" class="img-thumbnail"  />
-            break;
-        }
-    </td>
-    
-    <td>
-        <p> @Html.Label(t.desegnation) </p>
-    </td>
-    <td>
-        <p> @Html.Label(t.DescriptionProduit)) </p>
-    </td>
-
-    <td>
-        <p> @Html.Label(t.Prix.ToString()) </p>
-    </td>
-    <td>
-
-        <div class="btn btn-info">
-            @Html.AntiForgeryToken()
-
-            @Html.ActionLink("Modifier", "Update", new { id = t.IDProduit })
-        </div>
-        <div class="btn btn-danger">
-            @Html.AntiForgeryToken()
-            @Html.ActionLink("Supprimer", "Delete", new { id = t.IDProduit })
-        </div>
+        <tr>
 
 
-    </td>
+            <td>
+                @foreach (var a in t.ImageProduit)
+                {
+                    <img width="150px" height="150px" src="~/StorageImage/@a.NomImage" class="img-thumbnail" />
+                    break;
+                }
+            </td>
 
-</tr>
+            <td>
+                <p> @Html.Label(t.desegnation) </p>
+            </td>
+            <td>
+                <p> @Html.Label(t.DescriptionProduit)) </p>
+            </td>
+
+            <td>
+                <p> @Html.Label(t.Prix.ToString()) </p>
+            </td>
+            <td>
+
+                <div class="btn btn-info">
+                    @Html.AntiForgeryToken()
+
+                    @Html.ActionLink("Modifier", "Update", new { id = t.IDProduit })
+                </div>
+                <div class="btn btn-danger">
+                    @Html.AntiForgeryToken()
+                    @Html.ActionLink("Supprimer", "Delete", new { id = t.IDProduit })
+                </div>
+
+
+            </td>
+
+        </tr>
 
 
 

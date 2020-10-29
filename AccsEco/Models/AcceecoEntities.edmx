@@ -5,12 +5,24 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="AcceecoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Avis">
+          <Key>
+            <PropertyRef Name="idAvis" />
+          </Key>
+          <Property Name="idAvis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="textavis" Type="text" />
+          <Property Name="note" Type="int" />
+          <Property Name="idproduit" Type="int" />
+        </EntityType>
         <EntityType Name="Commande">
           <Key>
             <PropertyRef Name="IDcommande" />
           </Key>
           <Property Name="IDcommande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDuser" Type="int" />
+          <Property Name="Datecommande" Type="datetime" />
+          <Property Name="Etat" Type="text" />
+          <Property Name="IDtransport" Type="int" />
         </EntityType>
         <EntityType Name="CommandeDtrail">
           <Key>
@@ -21,7 +33,6 @@
           <Property Name="IDproduit" Type="int" />
           <Property Name="dateCommande" Type="datetime" />
           <Property Name="Qte" Type="int" />
-          <Property Name="IdTransport" Type="int" />
         </EntityType>
         <EntityType Name="ImageProduit">
           <Key>
@@ -70,6 +81,34 @@
           <Property Name="Motdepasse" Type="text" />
           <Property Name="Roleuser" Type="text" />
         </EntityType>
+        <Association Name="FK__Avis__idproduit__5CD6CB2B">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Avis" Type="Self.Avis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="IDProduit" />
+            </Principal>
+            <Dependent Role="Avis">
+              <PropertyRef Name="idproduit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commande__IDtran__4E88ABD4">
+          <End Role="transport" Type="Self.transport" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transport">
+              <PropertyRef Name="idTransport" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="IDtransport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Commande__IDuser__2B3F6F97">
           <End Role="UtilisateurSite" Type="Self.UtilisateurSite" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -84,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CommandeD__IDcom__3A81B327">
+        <Association Name="FK__CommandeD__IDcom__4AB81AF0">
           <End Role="Commande" Type="Self.Commande" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -98,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CommandeD__IDpro__3B75D760">
+        <Association Name="FK__CommandeD__IDpro__4BAC3F29">
           <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
           <End Role="CommandeDtrail" Type="Self.CommandeDtrail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -107,20 +146,6 @@
             </Principal>
             <Dependent Role="CommandeDtrail">
               <PropertyRef Name="IDproduit" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CommandeD__IdTra__3C69FB99">
-          <End Role="transport" Type="Self.transport" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="CommandeDtrail" Type="Self.CommandeDtrail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="transport">
-              <PropertyRef Name="idTransport" />
-            </Principal>
-            <Dependent Role="CommandeDtrail">
-              <PropertyRef Name="IdTransport" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -139,26 +164,31 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AcceecoModelStoreContainer">
+          <EntitySet Name="Avis" EntityType="Self.Avis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CommandeDtrail" EntityType="Self.CommandeDtrail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImageProduit" EntityType="Self.ImageProduit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transport" EntityType="Self.transport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UtilisateurSite" EntityType="Self.UtilisateurSite" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Avis__idproduit__5CD6CB2B" Association="Self.FK__Avis__idproduit__5CD6CB2B">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Avis" EntitySet="Avis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commande__IDtran__4E88ABD4" Association="Self.FK__Commande__IDtran__4E88ABD4">
+            <End Role="transport" EntitySet="transport" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
           <AssociationSet Name="FK__Commande__IDuser__2B3F6F97" Association="Self.FK__Commande__IDuser__2B3F6F97">
             <End Role="UtilisateurSite" EntitySet="UtilisateurSite" />
             <End Role="Commande" EntitySet="Commande" />
           </AssociationSet>
-          <AssociationSet Name="FK__CommandeD__IDcom__3A81B327" Association="Self.FK__CommandeD__IDcom__3A81B327">
+          <AssociationSet Name="FK__CommandeD__IDcom__4AB81AF0" Association="Self.FK__CommandeD__IDcom__4AB81AF0">
             <End Role="Commande" EntitySet="Commande" />
             <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
           </AssociationSet>
-          <AssociationSet Name="FK__CommandeD__IDpro__3B75D760" Association="Self.FK__CommandeD__IDpro__3B75D760">
+          <AssociationSet Name="FK__CommandeD__IDpro__4BAC3F29" Association="Self.FK__CommandeD__IDpro__4BAC3F29">
             <End Role="Produit" EntitySet="Produit" />
-            <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CommandeD__IdTra__3C69FB99" Association="Self.FK__CommandeD__IdTra__3C69FB99">
-            <End Role="transport" EntitySet="transport" />
             <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
           </AssociationSet>
           <AssociationSet Name="FK__ImageProd__IdPro__267ABA7A" Association="Self.FK__ImageProd__IdPro__267ABA7A">
@@ -171,14 +201,28 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AcceecoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Avis">
+          <Key>
+            <PropertyRef Name="idAvis" />
+          </Key>
+          <Property Name="idAvis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="textavis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="note" Type="Int32" />
+          <Property Name="idproduit" Type="Int32" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK__Avis__idproduit__5CD6CB2B" FromRole="Avis" ToRole="Produit" />
+        </EntityType>
         <EntityType Name="Commande">
           <Key>
             <PropertyRef Name="IDcommande" />
           </Key>
           <Property Name="IDcommande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDuser" Type="Int32" />
+          <Property Name="Datecommande" Type="DateTime" Precision="3" />
+          <Property Name="Etat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IDtransport" Type="Int32" />
+          <NavigationProperty Name="transport" Relationship="Self.FK__Commande__IDtran__4E88ABD4" FromRole="Commande" ToRole="transport" />
           <NavigationProperty Name="UtilisateurSite" Relationship="Self.FK__Commande__IDuser__2B3F6F97" FromRole="Commande" ToRole="UtilisateurSite" />
-          <NavigationProperty Name="CommandeDtrail" Relationship="Self.FK__CommandeD__IDcom__3A81B327" FromRole="Commande" ToRole="CommandeDtrail" />
+          <NavigationProperty Name="CommandeDtrail" Relationship="Self.FK__CommandeD__IDcom__4AB81AF0" FromRole="Commande" ToRole="CommandeDtrail" />
         </EntityType>
         <EntityType Name="CommandeDtrail">
           <Key>
@@ -189,10 +233,8 @@
           <Property Name="IDproduit" Type="Int32" />
           <Property Name="dateCommande" Type="DateTime" Precision="3" />
           <Property Name="Qte" Type="Int32" />
-          <Property Name="IdTransport" Type="Int32" />
-          <NavigationProperty Name="Commande" Relationship="Self.FK__CommandeD__IDcom__3A81B327" FromRole="CommandeDtrail" ToRole="Commande" />
-          <NavigationProperty Name="Produit" Relationship="Self.FK__CommandeD__IDpro__3B75D760" FromRole="CommandeDtrail" ToRole="Produit" />
-          <NavigationProperty Name="transport" Relationship="Self.FK__CommandeD__IdTra__3C69FB99" FromRole="CommandeDtrail" ToRole="transport" />
+          <NavigationProperty Name="Commande" Relationship="Self.FK__CommandeD__IDcom__4AB81AF0" FromRole="CommandeDtrail" ToRole="Commande" />
+          <NavigationProperty Name="Produit" Relationship="Self.FK__CommandeD__IDpro__4BAC3F29" FromRole="CommandeDtrail" ToRole="Produit" />
         </EntityType>
         <EntityType Name="ImageProduit">
           <Key>
@@ -216,7 +258,8 @@
           <Property Name="Prixbarre" Type="Double" />
           <Property Name="categorie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="codebar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CommandeDtrail" Relationship="Self.FK__CommandeD__IDpro__3B75D760" FromRole="Produit" ToRole="CommandeDtrail" />
+          <NavigationProperty Name="Avis" Relationship="Self.FK__Avis__idproduit__5CD6CB2B" FromRole="Produit" ToRole="Avis" />
+          <NavigationProperty Name="CommandeDtrail" Relationship="Self.FK__CommandeD__IDpro__4BAC3F29" FromRole="Produit" ToRole="CommandeDtrail" />
           <NavigationProperty Name="ImageProduit" Relationship="Self.FK__ImageProd__IdPro__267ABA7A" FromRole="Produit" ToRole="ImageProduit" />
         </EntityType>
         <EntityType Name="transport">
@@ -227,7 +270,7 @@
           <Property Name="nomtransporot" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="idsuivi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Etat" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CommandeDtrail" Relationship="Self.FK__CommandeD__IdTra__3C69FB99" FromRole="transport" ToRole="CommandeDtrail" />
+          <NavigationProperty Name="Commande" Relationship="Self.FK__Commande__IDtran__4E88ABD4" FromRole="transport" ToRole="Commande" />
         </EntityType>
         <EntityType Name="UtilisateurSite">
           <Key>
@@ -246,6 +289,34 @@
           <Property Name="Roleuser" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Commande" Relationship="Self.FK__Commande__IDuser__2B3F6F97" FromRole="UtilisateurSite" ToRole="Commande" />
         </EntityType>
+        <Association Name="FK__Avis__idproduit__5CD6CB2B">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Avis" Type="Self.Avis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="IDProduit" />
+            </Principal>
+            <Dependent Role="Avis">
+              <PropertyRef Name="idproduit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commande__IDtran__4E88ABD4">
+          <End Role="transport" Type="Self.transport" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transport">
+              <PropertyRef Name="idTransport" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="IDtransport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Commande__IDuser__2B3F6F97">
           <End Role="UtilisateurSite" Type="Self.UtilisateurSite" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -260,7 +331,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CommandeD__IDcom__3A81B327">
+        <Association Name="FK__CommandeD__IDcom__4AB81AF0">
           <End Role="Commande" Type="Self.Commande" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -274,7 +345,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CommandeD__IDpro__3B75D760">
+        <Association Name="FK__CommandeD__IDpro__4BAC3F29">
           <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
           <End Role="CommandeDtrail" Type="Self.CommandeDtrail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -283,20 +354,6 @@
             </Principal>
             <Dependent Role="CommandeDtrail">
               <PropertyRef Name="IDproduit" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CommandeD__IdTra__3C69FB99">
-          <End Role="transport" Type="Self.transport" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="CommandeDtrail" Type="Self.CommandeDtrail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="transport">
-              <PropertyRef Name="idTransport" />
-            </Principal>
-            <Dependent Role="CommandeDtrail">
-              <PropertyRef Name="IdTransport" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -315,26 +372,31 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AcceecoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Avis" EntityType="Self.Avis" />
           <EntitySet Name="Commande" EntityType="Self.Commande" />
           <EntitySet Name="CommandeDtrail" EntityType="Self.CommandeDtrail" />
           <EntitySet Name="ImageProduit" EntityType="Self.ImageProduit" />
           <EntitySet Name="Produit" EntityType="Self.Produit" />
           <EntitySet Name="transport" EntityType="Self.transport" />
           <EntitySet Name="UtilisateurSite" EntityType="Self.UtilisateurSite" />
+          <AssociationSet Name="FK__Avis__idproduit__5CD6CB2B" Association="Self.FK__Avis__idproduit__5CD6CB2B">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Avis" EntitySet="Avis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commande__IDtran__4E88ABD4" Association="Self.FK__Commande__IDtran__4E88ABD4">
+            <End Role="transport" EntitySet="transport" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
           <AssociationSet Name="FK__Commande__IDuser__2B3F6F97" Association="Self.FK__Commande__IDuser__2B3F6F97">
             <End Role="UtilisateurSite" EntitySet="UtilisateurSite" />
             <End Role="Commande" EntitySet="Commande" />
           </AssociationSet>
-          <AssociationSet Name="FK__CommandeD__IDcom__3A81B327" Association="Self.FK__CommandeD__IDcom__3A81B327">
+          <AssociationSet Name="FK__CommandeD__IDcom__4AB81AF0" Association="Self.FK__CommandeD__IDcom__4AB81AF0">
             <End Role="Commande" EntitySet="Commande" />
             <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
           </AssociationSet>
-          <AssociationSet Name="FK__CommandeD__IDpro__3B75D760" Association="Self.FK__CommandeD__IDpro__3B75D760">
+          <AssociationSet Name="FK__CommandeD__IDpro__4BAC3F29" Association="Self.FK__CommandeD__IDpro__4BAC3F29">
             <End Role="Produit" EntitySet="Produit" />
-            <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CommandeD__IdTra__3C69FB99" Association="Self.FK__CommandeD__IdTra__3C69FB99">
-            <End Role="transport" EntitySet="transport" />
             <End Role="CommandeDtrail" EntitySet="CommandeDtrail" />
           </AssociationSet>
           <AssociationSet Name="FK__ImageProd__IdPro__267ABA7A" Association="Self.FK__ImageProd__IdPro__267ABA7A">
@@ -348,11 +410,24 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AcceecoModelStoreContainer" CdmEntityContainer="AcceecoEntities">
+          <EntitySetMapping Name="Avis">
+            <EntityTypeMapping TypeName="AcceecoModel.Avis">
+              <MappingFragment StoreEntitySet="Avis">
+                <ScalarProperty Name="idAvis" ColumnName="idAvis" />
+                <ScalarProperty Name="textavis" ColumnName="textavis" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="idproduit" ColumnName="idproduit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Commande">
             <EntityTypeMapping TypeName="AcceecoModel.Commande">
               <MappingFragment StoreEntitySet="Commande">
                 <ScalarProperty Name="IDcommande" ColumnName="IDcommande" />
                 <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+                <ScalarProperty Name="Datecommande" ColumnName="Datecommande" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="IDtransport" ColumnName="IDtransport" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -364,7 +439,6 @@
                 <ScalarProperty Name="IDproduit" ColumnName="IDproduit" />
                 <ScalarProperty Name="dateCommande" ColumnName="dateCommande" />
                 <ScalarProperty Name="Qte" ColumnName="Qte" />
-                <ScalarProperty Name="IdTransport" ColumnName="IdTransport" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

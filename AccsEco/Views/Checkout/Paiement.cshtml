@@ -1,0 +1,192 @@
+﻿@model AccsEco.Models.Chechout
+@{
+    ViewBag.Title = "Paiement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+
+        .PanierPosition {
+            left: 631px;
+            right: 726px;
+            position: absolute;
+            bottom: -58px;
+        }
+    </style>
+    <script type="text/javascript">
+        var tam = document.getElementById("checkfacturation");
+        tam.style.display = "none";
+
+        // const tamplet = document.getElementById("checkfacturation").value;
+        function ke() {
+            var checkbox = document.getElementById("fluency");
+            var tam = document.getElementById("checkfacturation");
+            tam.style.display = "none";
+            checkbox.checked;
+            if (checkbox.checked == true) {
+
+                tam.style.display = "none";
+            } else {
+
+                tam.style.display = "block";
+
+            }
+
+        }
+    </script>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Paiement</title>
+</head>
+<body onload="ke()">
+    <div>
+
+        <h1>Informations de livraison:</h1>
+
+    </div>
+
+    <div class="container">
+
+        <div>
+
+            @using (Html.BeginForm("Paiement", "Checkout", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-row">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group ">
+
+                                @Html.LabelFor(model => model.info.Nom, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                                @Html.TextBoxFor(model => model.info.Nom, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group ">
+
+                                @Html.LabelFor(model => model.info.Prenom, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                                @Html.TextBoxFor(model => model.info.Prenom, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.info.Email, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                    @Html.TextBoxFor(model => model.info.Email, htmlAttributes: new { @class = "form-control" })
+
+                </div>
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.info.Telephone, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                    @Html.TextBoxFor(model => model.info.Telephone, htmlAttributes: new { @class = "form-control" })
+
+                </div>
+                <div class="form-group">
+
+                    <h6>  @Html.LabelFor(model => model.info.Adresselivraison, new { htmlAttributes = new { @class = "control-label col-md-2" } })</h6>
+                    @Html.TextBoxFor(model => model.info.Adresselivraison, htmlAttributes: new { @class = "form-control" })
+
+                </div>
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.info.CodePostallivraison, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                    @Html.TextBoxFor(model => model.info.CodePostallivraison, htmlAttributes: new { @class = "form-control" })
+
+                </div>
+                <div class="form-row">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+
+                                @Html.LabelFor(model => model.info.Villelivraison, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                                @Html.TextBoxFor(model => model.info.Villelivraison, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+
+                                @Html.LabelFor(model => model.info.Payslivraison, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                                @Html.TextBoxFor(model => model.info.Payslivraison, htmlAttributes: new { @class = "form-control" })
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-check">
+
+                    <input type="checkbox" id="fluency" onclick="ke()" spellcheck="false" />
+                    <input type="checkbox" id="fluendcy" onclick="ke()" checked />
+                    @*@Html.CheckBox("fluencya", new{@id="fluency"} )*@
+                    @Html.Label("même adresse de livraison pour la facuration", new { htmlAttributes = new { @class = "form-check-label" } })
+
+                </div>
+                <div class="" id="checkfacturation">
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-6"><h6>Adresse de facturation</h6></label>
+                        @Html.TextBoxFor(model => model.info.AdresseFacturation, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.info.CodePostalFacturation, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                        @Html.TextBoxFor(model => model.info.CodePostalFacturation, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+                    <div class="form-row">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+
+                                    @Html.LabelFor(model => model.info.VilleFacturation, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                                    @Html.TextBoxFor(model => model.info.VilleFacturation, htmlAttributes: new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+
+                                    @Html.LabelFor(model => model.info.PaysFacturation, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                                    @Html.TextBoxFor(model => model.info.PaysFacturation, htmlAttributes: new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+                <input type="submit" id="Paiement" value="Paiement" class="btn btn-success" />
+
+                 <div class="PanierPosition">
+                     <h6>Panier</h6>
+                     <table  class="table">
+                        <thead><td>img</td><td>Produit</td><td>Qte</td><td>.</td></thead>
+                         <tr><td><img src="~/img/Phone.png" /></td><td>Produit</td><td>50</td><td><img src="~/img/delete.png" width="10px" height="10px" /></td></tr>
+                     </table>
+
+
+
+                 </div>
+     
+
+
+
+            }
+
+</body>
+</html>

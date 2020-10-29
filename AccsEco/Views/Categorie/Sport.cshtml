@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<AccsEco.Models.Produit>      
 @{
     ViewBag.Title = "Sport";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,48 +7,51 @@
 <h2>Sport</h2>
 
 <div class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a short card.</p>
-                
-                <div class="btn btn-primary">
+    @foreach (var item in Model)
+    {
+        <div class="col mb-4">
+            <div class="card h-100">
 
-                    @Html.ActionLink("Detail","DetailProduit","Categorie")
 
+                @foreach (var image in item.ImageProduit)
+                {
+                    if (image == null)
+                    {
+                        <img src="~/img/basket.png" class="card-img-top">
+
+                    }
+                    else
+                    {
+
+                        <img src="~/StorageImage/@image.NomImage" alt="Image" class="card-img-top" enctype="Multipart/form-data" />
+                        break;
+                    }
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@item.desegnation</h5>
+                    <p class="card-text">@item.Prix</p>
+
+
+                    <div class="row">
+                        <div class="col">
+                            @using (Html.BeginForm("DetailProduit", "Categorie", new { ID = item.IDProduit }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="submit" value="View" class="btn btn-block" />
+                            }
+
+                        </div>
+                        <div class="col">
+                            @using (Html.BeginForm())
+                            {
+                                <input type="submit" value="Add" class="btn btn-block" />
+                            }
+                        </div>
+                    </div>
 
                 </div>
-                
+
             </div>
         </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card h-100">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-        </div>
-    </div>
+    }
 </div>

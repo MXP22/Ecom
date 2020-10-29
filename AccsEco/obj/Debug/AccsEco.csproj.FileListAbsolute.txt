@@ -1,3 +1,4 @@
+D:\Xamsoft\AccsEco\AccsEco\bin\img\basket.png
 D:\Xamsoft\AccsEco\AccsEco\bin\AccsEco.dll.config
 D:\Xamsoft\AccsEco\AccsEco\bin\AccsEco.dll
 D:\Xamsoft\AccsEco\AccsEco\bin\AccsEco.pdb
@@ -75,8 +76,8 @@ D:\Xamsoft\AccsEco\AccsEco\bin\fr\System.Web.Razor.resources.dll
 D:\Xamsoft\AccsEco\AccsEco\bin\fr\System.Web.WebPages.resources.dll
 D:\Xamsoft\AccsEco\AccsEco\bin\fr\System.Web.WebPages.Deployment.resources.dll
 D:\Xamsoft\AccsEco\AccsEco\bin\fr\System.Web.WebPages.Razor.resources.dll
+D:\Xamsoft\AccsEco\AccsEco\obj\Debug\AccsEco.csprojAssemblyReference.cache
 D:\Xamsoft\AccsEco\AccsEco\obj\Debug\AccsEco.csproj.CoreCompileInputs.cache
 D:\Xamsoft\AccsEco\AccsEco\obj\Debug\AccsEco.csproj.CopyComplete
 D:\Xamsoft\AccsEco\AccsEco\obj\Debug\AccsEco.dll
 D:\Xamsoft\AccsEco\AccsEco\obj\Debug\AccsEco.pdb
-D:\Xamsoft\AccsEco\AccsEco\obj\Debug\AccsEco.csprojAssemblyReference.cache

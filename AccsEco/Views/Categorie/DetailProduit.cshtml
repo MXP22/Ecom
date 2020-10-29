@@ -1,46 +1,89 @@
-﻿@{
+﻿@model AccsEco.Models.Produit
+@{
     ViewBag.Title = "DetailProduit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+    $(function () {
+        $('#Addtobasket').click(function () {
+            var IDproduit = $(this).attr('Data-id');
+            if (IDproduit != '') {
+
+                $.post("Categorie/Addtobasket", { "id": IDproduit });
+
+            }
+
+        })
+
+    }
+
+</script>
 <h2>DetailProduit</h2>
 <br />
 <br />
 
-<div class="container" >
-
+<div class="container">
     <div class="row row-cols-2">
         <div class="col">
 
-           <img src="~/img/iphone11promax.jpg" width="350px" height="250px" />
+            <img src="~/img/iphone11promax.jpg" width="350px" height="250px" />
 
         </div>
         <div class="col">
-            <h3>Iphone 11 Pro MAX</h3>
+            <h3>@Html.DisplayFor(model => model.desegnation)</h3>
             <div class="row row-cols-2">
                 <div class="col">
-                    
-                    <h3>1200€</h3>
+
+                    <h2>@Html.DisplayFor(model => model.Prix) €</h2>
                 </div>
                 <div class="col">
-                    <strong style="color:green">En stock</strong>
+                    @{
+                        if (Model.qte == 0)
+                        {
 
+
+                            <strong style="color:red">non Dispinible</strong>
+                        }
+                        else
+                        {
+                            <strong style="color:green">En stock</strong>
+
+                        }
+                    }
                 </div>
             </div>
-               
-               <h5>Description</h5>
+
+            <h5>Description</h5>
             <p>
-                Tout nouveau double appareil photo. Format XL ou XXL ? Pour chaque image, c’est vous qui voyez. La nouvelle interface utilise l’appareil ultra grand-angle pour vous montrer ce qui se passe hors cadre : vous avez toujours la globalité de la scène sous les yeux et vous pouvez changer d’appareil d’un toucher pour immortaliser l’ensemble. Il est même possible de retoucher vos vidéos comme vous le faites avec vos photos. Décidément, l’appareil photo le plus populaire au monde ne cesse de se réinventer pour vous offrir de nouvelles perspectives.
+                @Html.DisplayFor(model => model.DescriptionProduit)
             </p>
             <div class="row">
-               <div class="col">
+                <div class="col">
 
-                   
 
-               </div>
+
+                </div>
 
             </div>
-           
+
+            @using (Html.BeginForm("DetailProduit", "Categorie", new { ID = Model.IDProduit }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Ajouter au panier" class="btn btn-outline-success" name="submit" />
+
+            }
+
+
+            @using (Html.BeginForm("Checkout", "Checkout"))
+            {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Checkout" class="btn btn-outline-success" name="submit" />
+
+            }
+
+
         </div>
     </div>
+
 </div>
